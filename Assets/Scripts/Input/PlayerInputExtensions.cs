@@ -20,6 +20,18 @@ namespace TrippleMergeCity.Input
         }
 
 
+        public static void Bind( this PlayerInput playerInput, string actionName, UnityAction<bool> updatedAction )
+        {
+            var action = playerInput.actions[ actionName ];
+			action.performed += Update;
+			action.canceled += Update;
+
+            return;
+
+            void Update( InputAction.CallbackContext context ) => updatedAction?.Invoke( context.ReadValueAsButton() );
+        }
+
+
         public static void Bind( this PlayerInput playerInput, string actionName, ButtonEvents updatedAction )
         {
             var action = playerInput.actions[ actionName ];

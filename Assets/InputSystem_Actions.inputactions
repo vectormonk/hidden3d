@@ -1014,6 +1014,24 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "MouseClick",
+                    "type": "Button",
+                    "id": "d7f529c5-6cc2-4c96-821a-65bc091fd057",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MousePosition",
+                    "type": "PassThrough",
+                    "id": "322e9b66-06e3-4d93-a27f-03683f021d01",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "SecondTouch",
                     "type": "PassThrough",
                     "id": "95f1b712-e437-44e5-b712-4d9278fe6f72",
@@ -1030,7 +1048,7 @@
                     "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse;Touch;Gamepad;Joystick;XR",
                     "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1038,10 +1056,10 @@
                 {
                     "name": "",
                     "id": "732e5e14-e9da-4db5-9546-6ef920a45667",
-                    "path": "<Touchscreen>/touch0",
+                    "path": "<Touchscreen>/primaryTouch",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Touch",
+                    "groups": "Touch;Keyboard&Mouse;Gamepad;Joystick;XR",
                     "action": "Touch",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1054,6 +1072,28 @@
                     "processors": "",
                     "groups": "Touch",
                     "action": "SecondTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d4bff73c-a924-46f9-9545-9ee94b574de1",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch;Keyboard&Mouse;Gamepad;Joystick;XR",
+                    "action": "MouseClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c1c77ff-0246-4323-8a68-0f0ca936a103",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch;Keyboard&Mouse;Gamepad;Joystick;XR",
+                    "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
