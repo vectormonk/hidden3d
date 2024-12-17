@@ -10,6 +10,7 @@ namespace TrippleMergeCity
         [SerializeField] private Camera m_uiCamera;
         [SerializeField] private Transform m_cameraHolder;
         [SerializeField] private Vector2 m_minMaxZoom;
+        [SerializeField] private Vector2 m_bounds;
 
 
         private Plane _plane;
@@ -62,7 +63,13 @@ namespace TrippleMergeCity
             if( !TryGetPosition( pointerPosition, out Vector3 position ) )
                 return;
 
-            m_cameraHolder.Translate( _prevPosition - position, Space.World );
+            Vector3 delta = _prevPosition - position;
+            Vector3 newPosition = m_cameraHolder.position + delta;
+
+            newPosition.x = Mathf.Clamp( newPosition.x, -m_bounds.x, m_bounds.x );
+            newPosition.z = Mathf.Clamp( newPosition.z, -m_bounds.y, m_bounds.y );
+            
+            m_cameraHolder.position = newPosition;
         }
 
         

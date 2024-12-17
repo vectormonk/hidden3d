@@ -9,8 +9,6 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: WaterMaterial
   m_Shader: {fileID: -6465566751694194690, guid: 79c302345eca9054c99a53cd9bf85850, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -20,7 +18,6 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -84,14 +81,14 @@ Material:
     m_Floats:
     - Boolean_8f755de89e184da894125981c4c0ba78: 0
     - Depth_Fade: 13.3
-    - Smooth: 0.612
-    - Speed: 0.14
+    - Smooth: 0.578
+    - Speed: 0.4
     - Vector1_309cb8b1b2a4466aa02e543ab0c85a6e: 1
     - Vector1_4d9d83f9939e4caa8b44a1cbb1a0d82e: 0.12
     - Vector1_97655d08d61e40ffa24ba5dfb2fb2508: 2.69
     - Vector1_a1303d1858b74dc3808d8b7858823843: -11.1
     - Vector1_b477c45853f247c4b3ec903cfac6b438: 65.12
-    - Vector1_c892da3e47c54e8a865a0935bf75ad0a: 0.01
+    - Vector1_c892da3e47c54e8a865a0935bf75ad0a: 0.0125
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -134,7 +131,6 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &2039129046854816734
 MonoBehaviour:
   m_ObjectHideFlags: 11
