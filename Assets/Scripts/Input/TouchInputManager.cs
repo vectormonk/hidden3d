@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -14,12 +15,16 @@ namespace TrippleMergeCity.Input
         private bool _dragged;
         private bool _zooming;
 
+        private Vector2 _startPosition;
         private Vector2 _firstPosition;
         private Vector2 _secondsPosition;
         private float _prevDelta;
         private bool _pressed;
 
         private Vector2 _mousePosition;
+
+
+        private HashSet<int> _touches = new();
 
 
         public void Init( GameManager gameManager )
@@ -58,10 +63,13 @@ namespace TrippleMergeCity.Input
 
         private void OnTouch( TouchState touch, int touchID )
         {
-            if( touch.phase == UnityEngine.InputSystem.TouchPhase.Began )
-                OnPointerDown( touch.position, touchID );
-            else if( touch.phase == UnityEngine.InputSystem.TouchPhase.Moved )
-                OnDrag( touch.position, touchID );
+            if( touch.phase == UnityEngine.InputSystem.TouchPhase.Moved )
+            {
+                if( !_touches.Contains( touchID ) )
+                    OnPointerDown( touch.position, touchID );
+                else
+                    OnDrag( touch.position, touchID );
+            }
             else if( touch.phase == UnityEngine.InputSystem.TouchPhase.Ended )
                 OnPointerUp( touch.position, touchID );
         }
@@ -75,13 +83,19 @@ namespace TrippleMergeCity.Input
         
         public void OnPointerDown( Vector2 pointerPosition, int touchID )
         {
+            if( !_touches.Add( touchID ) )
+                return;
+
             if( touchID > 1 )
                 return;
 
             _gameManager.CameraController.OnPointerDown( pointerPosition );
 
             if( touchID == 0 )
+            {
                 _firstPosition = pointerPosition;
+                _startPosition = pointerPosition;
+            }
 
             if( touchID == 1 )
                 _secondsPosition = pointerPosition;
@@ -93,6 +107,9 @@ namespace TrippleMergeCity.Input
 
         public void OnDrag( Vector2 pointerPosition, int touchID )
         {
+            if( !_touches.Contains( touchID ) )
+                return;
+
             if( touchID > 1 )
                 return;
 
@@ -112,6 +129,9 @@ namespace TrippleMergeCity.Input
             }
             else
             {
+                if( Vector2.Distance( _startPosition, pointerPosition ) < 5f )
+                    return;
+                    
                 _dragged = true;
                 _gameManager.CameraController.OnDrag( pointerPosition );
             }
@@ -120,6 +140,9 @@ namespace TrippleMergeCity.Input
         
         public void OnPointerUp( Vector2 pointerPosition, int touchID )
         {
+            if( !_touches.Remove( touchID ) )
+                return;
+
             if( touchID > 1 )
                 return;
 

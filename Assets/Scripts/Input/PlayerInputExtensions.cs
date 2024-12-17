@@ -93,9 +93,9 @@ namespace TrippleMergeCity.Input
         {
             var action = playerInput.actions[ actionName ];
             
-            action.started += ( context ) => updatedAction?.Invoke( context.ReadValue<TouchState>() );
+            // action.started += ( context ) => updatedAction?.Invoke( context.ReadValue<TouchState>() );
 			action.performed += ( context ) => updatedAction?.Invoke( context.ReadValue<TouchState>() );
-			action.canceled += ( context ) => updatedAction?.Invoke( context.ReadValue<TouchState>() );
+			// action.canceled += ( context ) => updatedAction?.Invoke( context.ReadValue<TouchState>() );
         }
     }
 
