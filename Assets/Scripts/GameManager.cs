@@ -1,6 +1,5 @@
 using TrippleMergeCity.Input;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
@@ -9,8 +8,8 @@ namespace TrippleMergeCity
     public class GameManager : MonoBehaviour
     {
         [field: SerializeField] public CameraController CameraController { get; private set; }
-        [SerializeField] private LayerMask m_layerMask;
         [SerializeField] private PlayerInput m_playerInput;
+        [SerializeField] private LayerMask m_layerMask;
 
 
         public event System.Action<Collectable> OnCollected;

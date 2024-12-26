@@ -1,5 +1,8 @@
+using TrippleMergeCity.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 
 namespace TrippleMergeCity
@@ -9,40 +12,52 @@ namespace TrippleMergeCity
         [SerializeField] private Camera m_camera;
         [SerializeField] private Camera m_uiCamera;
         [SerializeField] private Transform m_cameraHolder;
-        [SerializeField] private Vector2 m_minMaxZoom;
-        [SerializeField] private Vector2 m_bounds;
+
+        [Space, SerializeField] private Range m_minMaxZoom;
+
+
+        private UniversalRenderPipelineAsset _urpAsset;
 
 
         private Plane _plane;
         private Vector3 _prevPosition;
         private bool _drag;
         private float _zoom;
+        private float _baseShadowDistance;
 
 
         private void Awake()
         {
             _plane = new( Vector3.down, Vector3.zero );
+
+            _urpAsset = (UniversalRenderPipelineAsset)GraphicsSettings.currentRenderPipeline;
+
+            _baseShadowDistance = _urpAsset.shadowDistance;
+
+            SetZoom( 0.5f );
         }
 
 
-        public void Zoom( Vector2 delta ) => Zoom( delta.y / 500f );
+        public void Zoom( Vector2 delta ) => Zoom( delta.y / 3000f );
 
         public void Zoom( float delta )
         {
-            SetZoom( Mathf.Clamp( _zoom + delta, m_minMaxZoom.x, m_minMaxZoom.y ) );
+            SetZoom( _zoom + delta );
         }
 
 
         private void SetZoom( float zoom )
         {
-            _zoom = zoom;
+            _zoom = Mathf.Clamp01( zoom );
 
-            float maxFOV = 60;
+            float d = m_minMaxZoom.max - m_minMaxZoom.min;
+            m_camera.orthographicSize = m_minMaxZoom.min + ( 1 - _zoom ) * d;
 
-            m_camera.fieldOfView = maxFOV - ( _zoom - 1 ) * ( maxFOV / m_minMaxZoom.y );
-            m_uiCamera.fieldOfView = m_camera.fieldOfView;
+            m_camera.transform.localPosition = new( 0f, 0f, -m_camera.orthographicSize );
 
-            m_camera.transform.localPosition = new( 0f, 0f, -10 + ( _zoom - 1 ) * 2.5f );
+            m_uiCamera.orthographicSize = m_camera.orthographicSize;
+
+            _urpAsset.shadowDistance = ( Mathf.Abs( m_camera.transform.localPosition.z ) + 1 ) * 2;
         }
 
 
@@ -66,8 +81,8 @@ namespace TrippleMergeCity
             Vector3 delta = _prevPosition - position;
             Vector3 newPosition = m_cameraHolder.position + delta;
 
-            newPosition.x = Mathf.Clamp( newPosition.x, -m_bounds.x, m_bounds.x );
-            newPosition.z = Mathf.Clamp( newPosition.z, -m_bounds.y, m_bounds.y );
+            // newPosition.x = Mathf.Clamp( newPosition.x, -m_minBounds.x, m_minBounds.x );
+            // newPosition.z = Mathf.Clamp( newPosition.z, -m_minBounds.y, m_minBounds.y );
             
             m_cameraHolder.position = newPosition;
         }
@@ -93,6 +108,13 @@ namespace TrippleMergeCity
 
             position = ray.GetPoint( distance );
             return true;
+        }
+
+
+        private void OnDestroy()
+        {
+            if( _urpAsset )
+                _urpAsset.shadowDistance = _baseShadowDistance;
         }
     }
 }

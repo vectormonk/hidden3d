@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.InputSystem.LowLevel;
 
 
@@ -9,9 +8,10 @@ namespace TrippleMergeCity.Input
 {
     public class TouchInputManager : MonoBehaviour
     {
+        [SerializeField] private GameManager m_gameManager;
         [SerializeField] private PlayerInput m_playerInput;
 
-        private GameManager _gameManager;
+
         private bool _dragged;
         private bool _zooming;
 
@@ -27,14 +27,12 @@ namespace TrippleMergeCity.Input
         private HashSet<int> _touches = new();
 
 
-        public void Init( GameManager gameManager )
+        private void Awake()
         {
 #if UNITY_EDITOR
             m_playerInput.Bind( "Gameplay/MouseClick", OnMouseClick );
             m_playerInput.Bind( "Gameplay/MousePosition", OnMousePosition );
 #endif
-            _gameManager = gameManager;
-
 
             m_playerInput.Bind( "Gameplay/Touch", ( touch ) => OnTouch( touch, 0 ) );
             m_playerInput.Bind( "Gameplay/SecondTouch", ( touch ) => OnTouch( touch, 1 ) );
@@ -89,7 +87,7 @@ namespace TrippleMergeCity.Input
             if( touchID > 1 )
                 return;
 
-            _gameManager.CameraController.OnPointerDown( pointerPosition );
+            m_gameManager.CameraController.OnPointerDown( pointerPosition );
 
             if( touchID == 0 )
             {
@@ -123,7 +121,7 @@ namespace TrippleMergeCity.Input
 
                 float delta = Vector2.Distance( _firstPosition, _secondsPosition );
                 float dd = delta - _prevDelta;
-                _gameManager.CameraController.Zoom( dd / 500f );
+                m_gameManager.CameraController.Zoom( dd / 500f );
 
                 _prevDelta = delta;
             }
@@ -133,7 +131,7 @@ namespace TrippleMergeCity.Input
                     return;
                     
                 _dragged = true;
-                _gameManager.CameraController.OnDrag( pointerPosition );
+                m_gameManager.CameraController.OnDrag( pointerPosition );
             }
         }
 
@@ -154,12 +152,12 @@ namespace TrippleMergeCity.Input
 
             if( !_dragged )
             {
-                _gameManager.OnPointerClick( pointerPosition );
+                m_gameManager.OnPointerClick( pointerPosition );
                 return;
             }
 
             _dragged = false;
-            _gameManager.CameraController.OnPointerUp();
+            m_gameManager.CameraController.OnPointerUp();
         }
 
 
@@ -170,7 +168,7 @@ namespace TrippleMergeCity.Input
             if( value )
             {
                 _dragged = false;
-                _gameManager.CameraController.OnPointerUp();
+                m_gameManager.CameraController.OnPointerUp();
 
                 _prevDelta = Vector2.Distance( _firstPosition, _secondsPosition );
             }

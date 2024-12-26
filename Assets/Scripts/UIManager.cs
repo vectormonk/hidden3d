@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TrippleMergeCity.Input;
 using UnityEngine;
 
 
@@ -8,15 +7,11 @@ namespace TrippleMergeCity
     public class UIManager : MonoBehaviour
     {
         [SerializeField] private GameManager m_gameManager;
-        [SerializeField] private TouchInputManager m_touchInput;
-
         [SerializeField] private List<ObjectHolder> m_objectsHolders;
 
 
         private void Awake()
         {
-            m_touchInput.Init( m_gameManager ); 
-
             m_gameManager.OnCollected += Collect;
         }
 
