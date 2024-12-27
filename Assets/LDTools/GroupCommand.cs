@@ -5,6 +5,7 @@ namespace VW.Client.Core.Editor.LDTools {
     public static class GroupCommand {
         #region Private
 
+#if UNITY_EDITOR
         [MenuItem("GameObject/Group Selected %g")]
         private static void GroupSelected() {
             if (!Selection.activeTransform) {
@@ -35,7 +36,7 @@ namespace VW.Client.Core.Editor.LDTools {
 
             Selection.activeGameObject = go;
         }
-
+#endif
         #endregion
     }
 }

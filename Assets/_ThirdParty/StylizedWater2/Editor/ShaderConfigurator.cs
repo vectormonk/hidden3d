@@ -678,7 +678,9 @@ namespace StylizedWater2
                 }
 
                 //Check if the displacement pre-pass is enabled anywhere
-                displacementPrePassEnabled = DisplacementPrePassEnabled();
+                // displacementPrePassEnabled = DisplacementPrePassEnabled();
+
+                displacementPrePassEnabled = true;
                 
                 StrippedKeywords.Clear();
 

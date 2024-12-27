@@ -163,18 +163,18 @@ namespace TrippleMergeCity
             Vector3 newPosition = m_cameraHolder.localPosition;
 
             if( tlPoint.x < m_minBounds.x )
-                newPosition.x -= tlPoint.x;
+                newPosition.x -= tlPoint.x - m_minBounds.x;
 
             if( tlPoint.z > m_maxBounds.y )
-                newPosition.z -= tlPoint.z - 100;
+                newPosition.z -= tlPoint.z - m_maxBounds.y;
             
             TryGetPointOnPlane( ViewportPointToRay( 1, 0 ), out Vector3 brPoint );
 
             if( brPoint.x > m_maxBounds.x )
-                newPosition.x -= brPoint.x - 100;
+                newPosition.x -= brPoint.x - m_maxBounds.x;
 
             if( brPoint.z < m_minBounds.y )
-                newPosition.z -= brPoint.z;
+                newPosition.z -= brPoint.z - m_minBounds.y;
 
             m_cameraHolder.localPosition = newPosition;
         }

@@ -5,7 +5,9 @@ namespace VW.Client.Core.Editor.LDTools {
     public static class SelectedTransformOperation {
         #region Private
 
+#if UNITY_EDITOR
         [MenuItem("GameObject/Transform Operation/Random Transform Selected %r")]
+
         private static void RandomTransform() {
             const float XZ_RAND = 5.0f;
             const float Y_RAND = 90.0f;
@@ -24,13 +26,14 @@ namespace VW.Client.Core.Editor.LDTools {
         }
 
         [MenuItem("GameObject/Transform Operation/Set default scale and rotate &r")]
+
         private static void RotateScaleDef() {
             foreach (var selectedTransform in Selection.transforms) {
                 selectedTransform.localRotation = Quaternion.identity;
                 selectedTransform.localScale = Vector3.one;
             }
         }
-
+#endif
         #endregion
     }
 }
