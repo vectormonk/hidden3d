@@ -36,8 +36,27 @@ public class CameraMovementTool : EditorWindow
             if (cameraComponent != null && cameraComponent.orthographic)
             {
                 GUILayout.Label("Camera Size", EditorStyles.boldLabel);
+
+                // Повзунок для налаштування масштабу
                 cameraSize = EditorGUILayout.Slider(cameraSize, 5f, 100f);
                 cameraComponent.orthographicSize = cameraSize;
+
+                GUILayout.Space(10);
+
+                // Пресети масштабу
+                GUILayout.Label("Zoom Presets", EditorStyles.boldLabel);
+
+                EditorGUILayout.BeginHorizontal();
+                if (GUILayout.Button("5", GUILayout.Width(50))) SetCameraSize(5f);
+                if (GUILayout.Button("10", GUILayout.Width(50))) SetCameraSize(10f);
+                if (GUILayout.Button("15", GUILayout.Width(50))) SetCameraSize(15f);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                if (GUILayout.Button("20", GUILayout.Width(50))) SetCameraSize(20f);
+                if (GUILayout.Button("25", GUILayout.Width(50))) SetCameraSize(25f);
+                if (GUILayout.Button("30", GUILayout.Width(50))) SetCameraSize(30f);
+                EditorGUILayout.EndHorizontal();
             }
 
             GUILayout.Space(10);
@@ -89,6 +108,20 @@ public class CameraMovementTool : EditorWindow
             if (cameraComponent != null)
             {
                 cameraComponent.enabled = enable;
+            }
+        }
+    }
+
+    private void SetCameraSize(float size)
+    {
+        if (ldCamera != null)
+        {
+            Camera cameraComponent = ldCamera.GetComponent<Camera>();
+            if (cameraComponent != null && cameraComponent.orthographic)
+            {
+                Undo.RecordObject(cameraComponent, "Set Camera Size");
+                cameraSize = size;
+                cameraComponent.orthographicSize = size;
             }
         }
     }
