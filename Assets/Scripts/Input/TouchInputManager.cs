@@ -121,7 +121,7 @@ namespace TrippleMergeCity.Input
 
                 float delta = Vector2.Distance( _firstPosition, _secondsPosition );
                 float dd = delta - _prevDelta;
-                m_gameManager.CameraController.Zoom( dd / 500f );
+                m_gameManager.CameraController.Zoom( ( _firstPosition + _secondsPosition ) / 2, dd / 500f );
 
                 _prevDelta = delta;
             }

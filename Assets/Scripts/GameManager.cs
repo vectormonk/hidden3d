@@ -17,10 +17,19 @@ namespace TrippleMergeCity
 
         private void Awake()
         {
-            m_playerInput.Bind( "Gameplay/Scroll", CameraController.Zoom );
+            m_playerInput.Bind( "Gameplay/Scroll", Zoom );
             m_playerInput.actions.FindActionMap( "Gameplay" ).Enable();
 
             SetMaxAvailableFrameRate();
+
+            return;
+
+            void Zoom( Vector2 delta )
+            {
+                var mousePos = Mouse.current.position.ReadValue();
+                
+                CameraController.Zoom( mousePos, delta );
+            }
         }
 
 
