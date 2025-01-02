@@ -2,15 +2,14 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Water_Ocean_01
   m_Shader: {fileID: 4800000, guid: 276a39a5a210b124885f0eff3e80f1f3, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ShaderKeywords: 
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -82,7 +81,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _RipplesNormal:
         m_Texture: {fileID: 2800000, guid: 65daf7c31bf358c468feca82d558eecd, type: 3}
-        m_Scale: {x: 3, y: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RipplesNormal2:
         m_Texture: {fileID: 2800000, guid: 82cd055e7c798f64ab98d2be4b731524, type: 3}
@@ -132,7 +131,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
     - _BumpScale: 1
@@ -141,7 +139,7 @@ Material:
     - _CausticSpeed: 1
     - _ColourNoiseScale1: 0.019
     - _Cutoff: 0.5
-    - _Depth: 0.26
+    - _Depth: 4.27
     - _DetailNormalMapScale: 1
     - _Distortion: 0.139
     - _Distortion1: 0.292
@@ -167,19 +165,19 @@ Material:
     - _GlowFalloff: 0.108
     - _Metallic: 0
     - _Mode: 0
-    - _NormalScale: 0.126
+    - _NormalScale: 0.264
     - _NormalTiling: 0.38
     - _NormalTiling2: 0.1
     - _ODM: 0.02
     - _OcclusionStrength: 1
-    - _Opacity: 1
+    - _Opacity: 0.9
     - _OpacityFalloff: 9.39
-    - _OpacityMin: 0.51
+    - _OpacityMin: 0.32
     - _OverallFalloff: 0.45
     - _Parallax: 0.02
-    - _ReflectionPower: 0.228
-    - _RippleSpeed: 0.085
-    - _ShallowFalloff: 0.21
+    - _ReflectionPower: 0.32
+    - _RippleSpeed: 0.1
+    - _ShallowFalloff: 0.4
     - _Smoothness: 2
     - _SmoothnessTextureChannel: 0
     - _Specular: 0.026
@@ -245,7 +243,7 @@ Material:
     - _waveNoiseOffset: 0.001
     - _waveTime: 14.15
     m_Colors:
-    - _CausticColour: {r: 0.43285865, g: 0.52390605, b: 0.7283019, a: 0}
+    - _CausticColour: {r: 0.355, g: 0.355, b: 0.355, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color3: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 0}
     - _Color4: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 0}
@@ -264,4 +262,3 @@ Material:
     - _WaterReallyDeepColor: {r: 0, g: 0.17401281, b: 0.277, a: 0}
     - _WaterShallowColor: {r: 0.9622642, g: 0.788881, b: 0.5764507, a: 1}
     - _WaterShallowColor1: {r: 0.9607843, g: 0.7882353, b: 0.5764706, a: 0}
-  m_BuildTextureStacks: []
